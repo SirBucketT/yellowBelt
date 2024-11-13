@@ -1,0 +1,14 @@
+C:\Projects\gp24-104-csharp-oop-basics-SirBucketT\ConsoleApp2\Mini Kata 5\bin\Debug\net7.0\Mini Kata 5.exe
+C:\Projects\gp24-104-csharp-oop-basics-SirBucketT\ConsoleApp2\Mini Kata 5\bin\Debug\net7.0\Mini Kata 5.deps.json
+C:\Projects\gp24-104-csharp-oop-basics-SirBucketT\ConsoleApp2\Mini Kata 5\bin\Debug\net7.0\Mini Kata 5.runtimeconfig.json
+C:\Projects\gp24-104-csharp-oop-basics-SirBucketT\ConsoleApp2\Mini Kata 5\bin\Debug\net7.0\Mini Kata 5.dll
+C:\Projects\gp24-104-csharp-oop-basics-SirBucketT\ConsoleApp2\Mini Kata 5\bin\Debug\net7.0\Mini Kata 5.pdb
+C:\Projects\gp24-104-csharp-oop-basics-SirBucketT\ConsoleApp2\Mini Kata 5\obj\Debug\net7.0\Mini Kata 5.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\gp24-104-csharp-oop-basics-SirBucketT\ConsoleApp2\Mini Kata 5\obj\Debug\net7.0\Mini Kata 5.AssemblyInfoInputs.cache
+C:\Projects\gp24-104-csharp-oop-basics-SirBucketT\ConsoleApp2\Mini Kata 5\obj\Debug\net7.0\Mini Kata 5.AssemblyInfo.cs
+C:\Projects\gp24-104-csharp-oop-basics-SirBucketT\ConsoleApp2\Mini Kata 5\obj\Debug\net7.0\Mini Kata 5.csproj.CoreCompileInputs.cache
+C:\Projects\gp24-104-csharp-oop-basics-SirBucketT\ConsoleApp2\Mini Kata 5\obj\Debug\net7.0\Mini Kata 5.dll
+C:\Projects\gp24-104-csharp-oop-basics-SirBucketT\ConsoleApp2\Mini Kata 5\obj\Debug\net7.0\refint\Mini Kata 5.dll
+C:\Projects\gp24-104-csharp-oop-basics-SirBucketT\ConsoleApp2\Mini Kata 5\obj\Debug\net7.0\Mini Kata 5.pdb
+C:\Projects\gp24-104-csharp-oop-basics-SirBucketT\ConsoleApp2\Mini Kata 5\obj\Debug\net7.0\Mini Kata 5.genruntimeconfig.cache
+C:\Projects\gp24-104-csharp-oop-basics-SirBucketT\ConsoleApp2\Mini Kata 5\obj\Debug\net7.0\ref\Mini Kata 5.dll
