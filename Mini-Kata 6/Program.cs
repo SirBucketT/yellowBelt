@@ -7,17 +7,19 @@ class Program
         string[] enemies = {"Goblin", "Orc", "troll" };
         Console.WriteLine($"Enemies:");
         
-        for (int i = 0; i < 3; i++)
+        for (var i = 0; i < 3; i++)
         {
             Console.WriteLine(enemies[i]);
-        }Console.WriteLine();
+        }
+        Console.WriteLine();
         
         string[] playerInventory = { "Sword", "Shield", "Potion" };
         
         for (int i = 0; i < 3; i++)
         {
             Console.WriteLine(playerInventory[i]);
-        }Console.WriteLine();
+        }
+        Console.WriteLine();
         
         List<string> inventoryList = new List<string>(playerInventory);
         
@@ -28,6 +30,7 @@ class Program
         for (int i = 0; i < 4; i++)
         {
             Console.WriteLine(playerInventory[i]);
-        }Console.WriteLine();
+        }
+        Console.WriteLine();
     }
 }
