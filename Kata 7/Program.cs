@@ -15,10 +15,10 @@ class Program
     class Player
     {
         public string name = "Arin";
-        public int Health = 100;
+        public int Health;
         public int Level = 1;
-        public int Experience = 50;
-        public int Damage = 50;
+        public int Experience;
+        public int Damage;
 
         public void Attack(int damage)
         {
