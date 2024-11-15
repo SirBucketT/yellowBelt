@@ -9,6 +9,7 @@ class Program
 
         player.Attack(damage:50);
         enemy.TakeDamage(damage:50);
+        player.GainExperience(exp:150);
     }
 
     class Player
