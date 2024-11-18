@@ -14,7 +14,6 @@ class Program
         NPC npc = new NPC("NPC");
         
         player.Attack(enemy, 20);
-        enemy.TakeDamage(player, 20);
         npc.Speak();
         
         merchant.Name = "Merchant";
@@ -38,6 +37,7 @@ class Program
         public void Attack(Enemy enemy, int damage)
         {
             Console.WriteLine($"{Name} attacks {enemy.Type} and deals {damage} damage.");
+            enemy.TakeDamage(this, damage);
         }
     }
 
