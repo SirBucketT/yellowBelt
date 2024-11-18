@@ -11,10 +11,9 @@ class Program
     {
         private int Level;
         private int Experience;
+        private int Health;
 
-        public int Health {get; private set;}
-
-        public int Level
+        public int level
         {
             get { return Level; }
             set
@@ -22,8 +21,23 @@ class Program
                 if (value < 0)
                 {
                     throw new ArgumentException("Level cannot be negative.");
-                    level = value;
                 }
+                
+                Level = value;
+            }
+        }
+        
+        public int experience
+        {
+            get { return Experience; }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Exp cannot be negative.");
+                }
+                
+                Experience = value;
             }
         }
     }

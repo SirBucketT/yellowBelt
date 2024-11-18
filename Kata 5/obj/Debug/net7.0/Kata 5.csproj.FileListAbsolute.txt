@@ -1,0 +1,14 @@
+C:\Projects\yellowBelt\Kata 5\bin\Debug\net7.0\Kata 5.exe
+C:\Projects\yellowBelt\Kata 5\bin\Debug\net7.0\Kata 5.deps.json
+C:\Projects\yellowBelt\Kata 5\bin\Debug\net7.0\Kata 5.runtimeconfig.json
+C:\Projects\yellowBelt\Kata 5\bin\Debug\net7.0\Kata 5.dll
+C:\Projects\yellowBelt\Kata 5\bin\Debug\net7.0\Kata 5.pdb
+C:\Projects\yellowBelt\Kata 5\obj\Debug\net7.0\Kata 5.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\yellowBelt\Kata 5\obj\Debug\net7.0\Kata 5.AssemblyInfoInputs.cache
+C:\Projects\yellowBelt\Kata 5\obj\Debug\net7.0\Kata 5.AssemblyInfo.cs
+C:\Projects\yellowBelt\Kata 5\obj\Debug\net7.0\Kata 5.csproj.CoreCompileInputs.cache
+C:\Projects\yellowBelt\Kata 5\obj\Debug\net7.0\Kata 5.dll
+C:\Projects\yellowBelt\Kata 5\obj\Debug\net7.0\refint\Kata 5.dll
+C:\Projects\yellowBelt\Kata 5\obj\Debug\net7.0\Kata 5.pdb
+C:\Projects\yellowBelt\Kata 5\obj\Debug\net7.0\Kata 5.genruntimeconfig.cache
+C:\Projects\yellowBelt\Kata 5\obj\Debug\net7.0\ref\Kata 5.dll
