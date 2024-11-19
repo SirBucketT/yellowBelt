@@ -1,0 +1,14 @@
+C:\Projects\yellowBelt\Exam Kata\bin\Debug\net7.0\Exam Kata.exe
+C:\Projects\yellowBelt\Exam Kata\bin\Debug\net7.0\Exam Kata.deps.json
+C:\Projects\yellowBelt\Exam Kata\bin\Debug\net7.0\Exam Kata.runtimeconfig.json
+C:\Projects\yellowBelt\Exam Kata\bin\Debug\net7.0\Exam Kata.dll
+C:\Projects\yellowBelt\Exam Kata\bin\Debug\net7.0\Exam Kata.pdb
+C:\Projects\yellowBelt\Exam Kata\obj\Debug\net7.0\Exam Kata.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\yellowBelt\Exam Kata\obj\Debug\net7.0\Exam Kata.AssemblyInfoInputs.cache
+C:\Projects\yellowBelt\Exam Kata\obj\Debug\net7.0\Exam Kata.AssemblyInfo.cs
+C:\Projects\yellowBelt\Exam Kata\obj\Debug\net7.0\Exam Kata.csproj.CoreCompileInputs.cache
+C:\Projects\yellowBelt\Exam Kata\obj\Debug\net7.0\Exam Kata.dll
+C:\Projects\yellowBelt\Exam Kata\obj\Debug\net7.0\refint\Exam Kata.dll
+C:\Projects\yellowBelt\Exam Kata\obj\Debug\net7.0\Exam Kata.pdb
+C:\Projects\yellowBelt\Exam Kata\obj\Debug\net7.0\Exam Kata.genruntimeconfig.cache
+C:\Projects\yellowBelt\Exam Kata\obj\Debug\net7.0\ref\Exam Kata.dll
