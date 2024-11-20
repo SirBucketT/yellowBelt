@@ -30,7 +30,6 @@ class Program
         
             void Goblin()
             {
-                player.Attack(enemy, 20);
                 if (enemy.Health <= 0)
                 {
                     Conditions.winCondition();
