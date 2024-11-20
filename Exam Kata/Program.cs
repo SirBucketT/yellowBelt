@@ -4,30 +4,91 @@ class Program
 {
     static void Main(string[] args)
     {
+        Console.WriteLine("Hello Sargent, what is your name?");
+            
         string name = Console.ReadLine();
-        Player player = new Player(name, 100, 20);
-        Enemy enemy = new Enemy("Goblin", 30, 50);
+        Player player = new Player(name, 100, 20, 15);
         NPC npc = new NPC("NPC");
+        Enemy enemy = new Enemy("Goblin", 30, 50);
         Merchant merchant = new Merchant();
         
-        Console.WriteLine($"Sargent {player.Name}: Reporting for duty!");
+        Console.WriteLine($"Sargent {player.Name} says: Reporting for duty!");
+
+        randomEncounter();
+
+        void randomEncounter()
+        {
+            Random random = new Random();
+            int EncounterNumber = 0; //random.Next(0, 5);
+            
+            Console.WriteLine($"Encounter {EncounterNumber}");
+
+            if (EncounterNumber == 0)
+            {
+                Goblin();
+            }
         
-        Random random = new Random();
-        random.Next(0, 5);
+            void Goblin()
+            {
+                player.Attack(enemy, 20);
+                if (enemy.Health <= 0)
+                {
+                    Conditions.winCondition();
+                }
+           
+                Console.WriteLine($"A wild Goblin appears with {enemy.Health} health and {enemy.Damage} damage! \n ");
+                Console.WriteLine($"Choose a action: \n 1. Attack! \n 2. Heal!");
+            
+                int action = Convert.ToInt32(Console.ReadLine());
+
+                if (action == 1)
+                {
+                    player.Attack(enemy, 20);
+                    randomEncounter();
+                }
+                else
+                {
+                    player.Healing(15);
+                    randomEncounter();
+                }
+            }
+        }
+        
     }
 
+    class Conditions
+    {
+        public static void winCondition()
+        {
+            Console.WriteLine($"Goblin defeated. Congratulations!");
+        }
+
+        static void loseCondition()
+        {
+            Console.WriteLine($"You lost!");
+        }
+    }
+    
     class Player
     {
         public string Name {get; set;}
         public int Health { get; set;}
+        public int Heal { get; set;}
         public int Level { get; set;}
         public int Damage { get; set;}
 
-        public Player(string name, int health, int damage)
+        public Player(string name, int health, int damage, int heal)
         {
             Name = name;
             Health = health;
             Damage = damage;
+            Heal = heal;
+        }
+
+        public void Healing(int heal)
+        {
+            Console.WriteLine($"{Name} uses heal and healed {heal} health points!");
+            Health += heal;
         }
 
         public void Attack(Enemy enemy, int damage)
