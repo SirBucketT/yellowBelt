@@ -9,36 +9,41 @@ class Program
         string name = Console.ReadLine();
         Player player = new Player(name, 100, 20, 15);
         NPC npc = new NPC("NPC");
-        Enemy enemy = new Enemy("Goblin", 30, 50);
-        Merchant merchant = new Merchant();
-        
         Console.WriteLine($"Sargent {player.Name} says: Reporting for duty!");
         
         //Gameloop
         bool isAlive = true;
-        while (isAlive == true)
+        while (isAlive)
         {
-            randomEncounter();
+            RandomEncounter();
         }
         
         //Random number generator deciding what encounter you face
-        void randomEncounter()
+        void RandomEncounter()
         { 
             Random random = new Random(); 
-            int EncounterNumber = 0; //random.Next(0, 5);
+            int EncounterNumber = 1; //random.Next(0, 5);
                                      
             Console.WriteLine($"Encounter {EncounterNumber}");
             if (EncounterNumber == 0) 
             { 
                 Goblin(); 
             }
-        } 
+
+            if (EncounterNumber == 1)
+            {
+                Events.Shop();
+                Merchant.Trade();
+                isAlive = false;
+            }
+        }
         
         void Goblin() 
         { 
+            Enemy enemy = new Enemy("Goblin", 30, 50);
             if (enemy.Health <= 0) 
             { 
-                Conditions.winCondition(); 
+                Conditions.WinCondition(); 
             }
             Console.WriteLine($"A wild Goblin appears with {enemy.Health} health and {enemy.Damage} damage! \n "); 
             Console.WriteLine($"Choose a action: \n 1. Attack! \n 2. Heal!"); 
@@ -48,31 +53,40 @@ class Program
             { 
                 enemy.Attack(player, 50); 
                 player.Attack(enemy, 20); 
-                randomEncounter();
+                RandomEncounter();
             }
             else 
             { 
                 enemy.Attack(player, 50); 
                 player.Healing(15); 
-                randomEncounter();
+                RandomEncounter();
             }
 
             if (player.Health <= 0 || player.Health < 0) 
-            { 
-                Conditions.loseCondition(); 
+            {
                 isAlive = false; 
+                Conditions.LoseCondition();
             }
+        }
+    }
+
+    class Events
+    {
+        public static void Shop()
+        {
+            Merchant merchant = new Merchant("Hammer the Merchant");
+            Console.WriteLine($"{merchant.Name}");
         }
     }
 
     class Conditions
     {
-        public static void winCondition()
+        public static void WinCondition()
         {
             Console.WriteLine($"Goblin defeated. Congratulations!");
         }
 
-        public static void loseCondition()
+        public static void LoseCondition()
         {
             Console.WriteLine($"You lost!");
         }
@@ -158,12 +172,35 @@ class Program
     class Merchant
     {
         public string Name {get; set;}
-        public string Inventory {get; private set;}
-
-        public void Trade()
+        //public string Inventory {get; private set;}
+        public Merchant(string name)
         {
-            Inventory = "Sword, Shield, Potion";
-            Console.WriteLine($"{Name} inventory: {Inventory}");
+            Name = name;
+        }
+
+        public static void Trade()
+        {
+            string[] inventoryItems = { "1. Sword", "2. Shield", "3. Potion" };
+            
+            foreach (var i in inventoryItems)
+            {
+                Console.WriteLine(i);
+            }
+
+            Console.WriteLine();
+
+            List<string> playerInventoryList = new List<string>(inventoryItems);
+            
+            playerInventoryList.Remove("3. Potion");
+       
+            inventoryItems = playerInventoryList.ToArray();
+       
+            Console.WriteLine("Updated Inventory:");
+       
+            foreach (var i in inventoryItems)
+            {
+                Console.WriteLine(i);
+            }
         }
     }
 }
