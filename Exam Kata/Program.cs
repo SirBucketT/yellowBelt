@@ -7,8 +7,7 @@ class Program
         Console.WriteLine("Hello Sargent, what is your name?");
             
         string name = Console.ReadLine();
-        Player player = new Player(name, 100, 20, 15);
-        NPC npc = new NPC("NPC");
+        Player player = new Player(name, 100, 20, 15, 0);
         Console.WriteLine($"Sargent {player.Name} says: Reporting for duty!");
         
         //Gameloop
@@ -22,7 +21,7 @@ class Program
         void RandomEncounter()
         { 
             Random random = new Random(); 
-            int EncounterNumber = 1; //random.Next(0, 5);
+            int EncounterNumber = random.Next(0, 3);
                                      
             Console.WriteLine($"Encounter {EncounterNumber}");
             if (EncounterNumber == 0) 
@@ -30,43 +29,67 @@ class Program
                 Goblin(); 
             }
 
-            if (EncounterNumber == 1)
+            else if (EncounterNumber == 1)
             {
                 Events.Shop();
-                Merchant.Trade();
-                isAlive = false;
+            }
+
+            else if (EncounterNumber == 2)
+            {
+                Events.Villager();
             }
         }
         
         void Goblin() 
         { 
             Enemy enemy = new Enemy("Goblin", 30, 50);
-            if (enemy.Health <= 0) 
-            { 
-                Conditions.WinCondition(); 
-            }
+            
+            ConditionalCheck();
+            
             Console.WriteLine($"A wild Goblin appears with {enemy.Health} health and {enemy.Damage} damage! \n "); 
             Console.WriteLine($"Choose a action: \n 1. Attack! \n 2. Heal!"); 
             
             int action = Convert.ToInt32(Console.ReadLine());
             if (action == 1) 
             { 
-                enemy.Attack(player, 50); 
-                player.Attack(enemy, 20); 
-                RandomEncounter();
+                enemy.Attack(player, 50);
+                Console.WriteLine();
+                player.Attack(enemy, 50);
+                ConditionalCheck();
             }
-            else 
+            else if (action == 2)
             { 
-                enemy.Attack(player, 50); 
-                player.Healing(15); 
-                RandomEncounter();
+                enemy.Attack(player, 30);
+                Console.WriteLine();
+                player.Healing(25);
+                ConditionalCheck();
             }
-
-            if (player.Health <= 0 || player.Health < 0) 
+            
+            void ConditionalCheck()
             {
-                isAlive = false; 
-                Conditions.LoseCondition();
+                if (enemy.Health <= 0) 
+                { 
+                    player.Experience += 30;
+                    Console.WriteLine(player.Experience);
+                    Conditions.WinCondition();
+                    isAlive = false;
+                }
+
+                else if (player.Health <= 0) 
+                {
+                    isAlive = false; 
+                    Conditions.LoseCondition();
+                }
+                else
+                {
+                    RandomEncounter();
+                    action = 3;
+                }
             }
+            
+            Console.WriteLine("press any button to continue...");
+            Console.WriteLine($"\n ...\n ");
+            Console.ReadLine();
         }
     }
 
@@ -76,6 +99,19 @@ class Program
         {
             Merchant merchant = new Merchant("Hammer the Merchant");
             Console.WriteLine($"{merchant.Name}");
+            Merchant.Trade();
+
+            Console.WriteLine("press any button to continue...");
+            Console.WriteLine($"\n ...\n ");
+            Console.ReadLine();
+        }
+
+        public static void Villager()
+        {
+            Console.WriteLine("You encounter a Villager. \n Villager says: Welcome to our village!");
+            Console.WriteLine("press any button to continue...");
+            Console.WriteLine($"\n ...\n ");
+            Console.ReadLine();
         }
     }
 
@@ -99,13 +135,15 @@ class Program
         public int Heal { get; set;}
         public int Level { get; set;}
         public int Damage { get; set;}
+        public int Experience { get; set;}
 
-        public Player(string name, int health, int damage, int heal)
+        public Player(string name, int health, int damage, int heal, int exp)
         {
             Name = name;
             Health = health;
             Damage = damage;
             Heal = heal;
+            Experience = exp;
         }
 
         public void Healing(int heal)
@@ -180,6 +218,7 @@ class Program
 
         public static void Trade()
         {
+            Console.WriteLine("Select what item you wish to buy:");
             string[] inventoryItems = { "1. Sword", "2. Shield", "3. Potion" };
             
             foreach (var i in inventoryItems)
@@ -191,11 +230,22 @@ class Program
 
             List<string> playerInventoryList = new List<string>(inventoryItems);
             
-            playerInventoryList.Remove("3. Potion");
+            string input = Console.ReadLine();
+            if (input == "1")
+            {
+                playerInventoryList.Remove("1. Sword");
+            } else if (input == "2")
+            {
+                playerInventoryList.Remove("2. Shield");
+            }
+            else
+            {
+                playerInventoryList.Remove("3. Potion");
+            }
        
             inventoryItems = playerInventoryList.ToArray();
        
-            Console.WriteLine("Updated Inventory:");
+            Console.WriteLine("Items left in stock:");
        
             foreach (var i in inventoryItems)
             {
