@@ -5,95 +5,39 @@ class Program
     static void Main(string[] args)
     {
         Console.WriteLine("Hello Sargent, what is your name?");
-            
-        string name = Console.ReadLine();
-        Player player = new Player(name, 100, 20, 15, 0);
-        Console.WriteLine($"Sargent {player.Name} says: Reporting for duty!");
         
-        //Gameloop
-        bool isAlive = true;
-        while (isAlive)
+        GameLoop.GameRunner();//Gameloop method
+    }
+
+    public class GameLoop
+    {
+        public static void GameRunner()
         {
-            RandomEncounter();
+            string name = Console.ReadLine(); 
+            
+            bool isAlive = true;
+            while(isAlive)
+            {
+                isAlive = EncounterSpawner.RandomEncounter(name);
+            }
+            
         }
-        
-        //Random number generator deciding what encounter you face
-        void RandomEncounter()
-        { 
-            Random random = new Random(); 
-            int EncounterNumber = random.Next(0, 3);
-                                     
-            Console.WriteLine($"Encounter {EncounterNumber}");
-            if (EncounterNumber == 0) 
-            { 
-                Goblin(); 
-            }
-
-            else if (EncounterNumber == 1)
-            {
-                Events.Shop();
-            }
-
-            else if (EncounterNumber == 2)
-            {
-                Events.Villager();
-            }
+    }
+    
+    public class Conditions
+    {
+        public static void WinCondition()
+        {
+            Console.WriteLine($"Goblin defeated. Congratulations!");
         }
-        
-        void Goblin() 
-        { 
-            Enemy enemy = new Enemy("Goblin", 30, 50);
-            
-            ConditionalCheck();
-            
-            Console.WriteLine($"A wild Goblin appears with {enemy.Health} health and {enemy.Damage} damage! \n "); 
-            Console.WriteLine($"Choose a action: \n 1. Attack! \n 2. Heal!"); 
-            
-            int action = Convert.ToInt32(Console.ReadLine());
-            if (action == 1) 
-            { 
-                enemy.Attack(player, 50);
-                Console.WriteLine();
-                player.Attack(enemy, 50);
-                ConditionalCheck();
-            }
-            else if (action == 2)
-            { 
-                enemy.Attack(player, 30);
-                Console.WriteLine();
-                player.Healing(25);
-                ConditionalCheck();
-            }
-            
-            void ConditionalCheck()
-            {
-                if (enemy.Health <= 0) 
-                { 
-                    player.Experience += 30;
-                    Console.WriteLine(player.Experience);
-                    Conditions.WinCondition();
-                    isAlive = false;
-                }
 
-                else if (player.Health <= 0) 
-                {
-                    isAlive = false; 
-                    Conditions.LoseCondition();
-                }
-                else
-                {
-                    RandomEncounter();
-                    action = 3;
-                }
-            }
-            
-            Console.WriteLine("press any button to continue...");
-            Console.WriteLine($"\n ...\n ");
-            Console.ReadLine();
+        public static void LoseCondition()
+        {
+            Console.WriteLine($"You lost!");
         }
     }
 
-    class Events
+    public class Events
     {
         public static void Shop()
         {
@@ -113,22 +57,66 @@ class Program
             Console.WriteLine($"\n ...\n ");
             Console.ReadLine();
         }
+        public static bool Goblin(string? name)
+        {
+            Enemy enemy = new Enemy("Goblin", 30, 50);
+            Player player = new Player(name, 100, 20, 5, 0);
+            Console.WriteLine($"Sargent {player.Name} says: Reporting for duty!");
+
+            bool healthRemain = true;
+            while (healthRemain)
+            {
+                
+                Console.WriteLine($"A wild Goblin appears with {enemy.Health} health and {enemy.Damage} damage!");
+                Console.WriteLine($"Choose an action: \n1. Attack! \n2. Heal!");
+
+                int action = Convert.ToInt32(Console.ReadLine());
+                if (action == 1)
+                {
+                    player.Attack(enemy, player.Damage);
+                    if (enemy.Health > 0)
+                    {
+                        enemy.Attack(player, enemy.Damage);
+                    }
+                }
+                else if (action == 2)
+                {
+                    player.Healing(player.Heal);
+                    if (enemy.Health > 0)
+                    {
+                        enemy.Attack(player, enemy.Damage);
+                    }
+                }
+
+                healthRemain = ConditionalCheck(player, enemy);
+            }
+            
+            Console.WriteLine("press any button to continue...");
+            Console.WriteLine($"\n ...\n ");
+            Console.ReadLine();
+
+            return player.Health > 0;
+        }
+        public static bool ConditionalCheck(Player player, Enemy enemy)
+        {
+            if (enemy.Health <= 0)
+            {
+                player.Experience += 30;
+                Console.WriteLine($"{player.Name} gained: {player.Experience} EXP");
+                Conditions.WinCondition();
+                return true; // End combat
+            }
+            if (player.Health <= 0)
+            {
+                Conditions.LoseCondition();
+                return false; // End game
+            }
+            return true; // Continue combat
+        }
+        }
     }
 
-    class Conditions
-    {
-        public static void WinCondition()
-        {
-            Console.WriteLine($"Goblin defeated. Congratulations!");
-        }
-
-        public static void LoseCondition()
-        {
-            Console.WriteLine($"You lost!");
-        }
-    }
-    
-    class Player
+    public class Player
     {
         public string Name {get; set;}
         public int Health { get; set;}
@@ -164,8 +152,8 @@ class Program
             Console.WriteLine($"{enemy.Type} takes {damage} damage. Remaining health: {enemy.Health}");
         }
     }
-    
-    class Enemy
+
+    public class Enemy
     {
         public string Type {get; set;}
         public int Health {get; set;}
@@ -252,5 +240,33 @@ class Program
                 Console.WriteLine(i);
             }
         }
+    }
+    
+    public class EncounterSpawner
+    {
+        public static bool RandomEncounter(string? name)
+        { 
+            Random random = new Random(); 
+            int encounterNumber = random.Next(0, 3); 
+        
+            Console.WriteLine($"Encounter {encounterNumber}");
+            bool result = true;
+            if (encounterNumber == 0) 
+            { 
+                Program.Events.Goblin(name); 
+            }
+        
+            else if (encounterNumber == 1) 
+            { 
+                Program.Events.Shop();
+                result = true;
+            }
+        
+            else if (encounterNumber == 2) 
+            { 
+                Program.Events.Villager(); 
+                result = true; 
+            } 
+        return result; 
     }
 }
