@@ -15,13 +15,13 @@ public class RandomEncounter
 
         else if (EncounterNumber == 1)
         {
-            //Events.Shop();
+            Merchant.Shop();
             isAlive = true;
         }
 
         else if (EncounterNumber == 2)
         {
-            //Events.Villager();
+            Events.Villager();
             isAlive = true;
         }
         return isAlive;

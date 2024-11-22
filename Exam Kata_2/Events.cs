@@ -2,16 +2,16 @@ namespace Exam_Kata_2;
 
 public class Events
 {
-    public static void Shop()
-    {
-        Merchant merchant = new Merchant("Hammer the Merchant");
-        Console.WriteLine($"{merchant.Name}");
-        Merchant.Trade();
-
-        Console.WriteLine("press any button to continue...");
-        Console.WriteLine($"\n ...\n ");
-        Console.ReadLine();
-    }
+    //     public static void Shop()
+    //     {
+    //     Merchant merchant = new Merchant("Hammer the Merchant");
+    //     Console.WriteLine($"{merchant.Name}");
+    //     Merchant.Trade();
+    //
+    //     Console.WriteLine("press any button to continue...");
+    //     Console.WriteLine($"\n ...\n ");
+    //     Console.ReadLine();
+    // }
 
     public static void Villager()
     {
@@ -20,5 +20,4 @@ public class Events
         Console.WriteLine($"\n ...\n ");
         Console.ReadLine();
     }
-}
 }
