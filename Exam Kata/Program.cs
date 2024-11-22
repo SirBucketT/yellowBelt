@@ -5,6 +5,10 @@ class Program
     static void Main(string[] args)
     {
         Console.WriteLine("Hello Sargent, what is your name?");
+            
+        string name = Console.ReadLine();
+        Player player = new Player(name, 10, 20, 15, 0);
+        Console.WriteLine($"Sargent {player.Name} says: Reporting for duty!");
         
         GameLoop.GameRunner();//Gameloop method
     }
@@ -13,27 +17,91 @@ class Program
     {
         public static void GameRunner()
         {
-            string name = Console.ReadLine(); 
-            
+            isAlive = RandomEncounter();
+        }
+        
+        //Random number generator deciding what encounter you face
+        bool RandomEncounter()
+        { 
             bool isAlive = true;
-            while(isAlive)
+            Random random = new Random(); 
+            int EncounterNumber = random.Next(0, 3);
+            
+            if (EncounterNumber == 0) 
+            { 
+                isAlive = Goblin(); 
+            }
+
+            else if (EncounterNumber == 1)
             {
-                isAlive = EncounterSpawner.RandomEncounter(name);
+                Events.Shop();
+                isAlive = true;
+            }
+
+            else if (EncounterNumber == 2)
+            {
+                Events.Villager();
+                isAlive = true;
+            }
+            return isAlive;
+        }
+        
+        bool Goblin() 
+        { 
+            bool isAlive;
+            Enemy enemy = new Enemy("Goblin", 100, 50);
+            
+            isAlive= ConditionalCheck();
+            
+            Console.WriteLine($"A wild Goblin appears with {enemy.Health} health and {enemy.Damage} damage! \n "); 
+            Console.WriteLine($"Choose a action: \n 1. Attack! \n 2. Heal!"); 
+            
+            int action = Convert.ToInt32(Console.ReadLine());
+            if (action == 1) 
+            { 
+                enemy.Attack(player, 5000);
+                ConditionalCheck();
+                player.Attack(enemy, 50);
+                ConditionalCheck();
+            }
+            else if (action == 2)
+            { 
+                player.Healing(25);
+                ConditionalCheck();
+                enemy.Attack(player, 20000);
+                ConditionalCheck();
+                Console.WriteLine();
             }
             
-        }
-    }
-    
-    public class Conditions
-    {
-        public static void WinCondition()
-        {
-            Console.WriteLine($"Goblin defeated. Congratulations!");
-        }
+            bool ConditionalCheck()
+            {
+                bool isAlive;
+                if (enemy.Health <= 0) 
+                { 
+                    player.Experience += 30;
+                    Console.WriteLine(player.Experience);
+                    Conditions.WinCondition();
+                    isAlive = false;
+                }
 
-        public static void LoseCondition()
-        {
-            Console.WriteLine($"You lost!");
+                if (player.Health <= 0) 
+                {
+                    Conditions.LoseCondition();
+                    isAlive = false;
+                }
+                else
+                {
+                    Console.WriteLine("press any button to continue...");
+                    Console.WriteLine($"\n ...\n ");
+                    Console.ReadLine();
+                    RandomEncounter();
+                    action = 3;
+                    isAlive = true;
+                }
+                return isAlive; 
+            }
+
+            return isAlive;
         }
     }
 
