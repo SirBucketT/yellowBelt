@@ -7,44 +7,48 @@ class Program
         Console.WriteLine("Hello Sargent, what is your name?");
             
         string name = Console.ReadLine();
-        Player player = new Player(name, 100, 20, 15, 0);
+        Player player = new Player(name, 10, 20, 15, 0);
         Console.WriteLine($"Sargent {player.Name} says: Reporting for duty!");
         
         //Gameloop
         bool isAlive = true;
         while (isAlive)
         {
-            RandomEncounter();
+            isAlive = RandomEncounter();
         }
         
         //Random number generator deciding what encounter you face
-        void RandomEncounter()
+        bool RandomEncounter()
         { 
+            bool isAlive = true;
             Random random = new Random(); 
             int EncounterNumber = random.Next(0, 3);
-                                     
-            Console.WriteLine($"Encounter {EncounterNumber}");
+            
             if (EncounterNumber == 0) 
             { 
-                Goblin(); 
+                isAlive = Goblin(); 
             }
 
             else if (EncounterNumber == 1)
             {
                 Events.Shop();
+                isAlive = true;
             }
 
             else if (EncounterNumber == 2)
             {
                 Events.Villager();
+                isAlive = true;
             }
+            return isAlive;
         }
         
-        void Goblin() 
+        bool Goblin() 
         { 
-            Enemy enemy = new Enemy("Goblin", 30, 50);
+            bool isAlive;
+            Enemy enemy = new Enemy("Goblin", 100, 50);
             
-            ConditionalCheck();
+            isAlive= ConditionalCheck();
             
             Console.WriteLine($"A wild Goblin appears with {enemy.Health} health and {enemy.Damage} damage! \n "); 
             Console.WriteLine($"Choose a action: \n 1. Attack! \n 2. Heal!"); 
@@ -52,21 +56,23 @@ class Program
             int action = Convert.ToInt32(Console.ReadLine());
             if (action == 1) 
             { 
-                enemy.Attack(player, 50);
-                Console.WriteLine();
+                enemy.Attack(player, 5000);
+                ConditionalCheck();
                 player.Attack(enemy, 50);
                 ConditionalCheck();
             }
             else if (action == 2)
             { 
-                enemy.Attack(player, 30);
-                Console.WriteLine();
                 player.Healing(25);
                 ConditionalCheck();
+                enemy.Attack(player, 20000);
+                ConditionalCheck();
+                Console.WriteLine();
             }
             
-            void ConditionalCheck()
+            bool ConditionalCheck()
             {
+                bool isAlive;
                 if (enemy.Health <= 0) 
                 { 
                     player.Experience += 30;
@@ -75,21 +81,24 @@ class Program
                     isAlive = false;
                 }
 
-                else if (player.Health <= 0) 
+                if (player.Health <= 0) 
                 {
-                    isAlive = false; 
                     Conditions.LoseCondition();
+                    isAlive = false;
                 }
                 else
                 {
+                    Console.WriteLine("press any button to continue...");
+                    Console.WriteLine($"\n ...\n ");
+                    Console.ReadLine();
                     RandomEncounter();
                     action = 3;
+                    isAlive = true;
                 }
+                return isAlive; 
             }
-            
-            Console.WriteLine("press any button to continue...");
-            Console.WriteLine($"\n ...\n ");
-            Console.ReadLine();
+
+            return isAlive;
         }
     }
 
