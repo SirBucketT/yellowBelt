@@ -4,12 +4,11 @@ public class win_loss_messages
 {
     public static void WinCondition()
     {
-        Console.WriteLine($"Goblin defeated. Congratulations! \n Press anything to play again? ");
+        Console.WriteLine($"Goblin defeated. Congratulations!");
     }
 
     public static void LoseCondition()
     {
-        Console.WriteLine($"You lost! \n Press anything to play again? ");
-       
+        Console.WriteLine($"You lost!");
     }
 }
